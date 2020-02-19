@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  const [cards, setCards] = useState(buildCards());
+  const renderCard = card => {
+    const { frontImg, backImg, flipped } = card;
+    const img = flipped ? frontImg : backImg;
+    return (
+      <div className="Card">
+        <img src={img} alt="" />
+      </div>
+    );
+  };
 
-export default App;
+  function buildCards() {
+    let id = 0;
+    const images = {
+      angular: 'url to img',
+      css: 'url to img',
+      html: 'url to img',
+      go: 'url to img',
+      rail: 'url to img',
+      react: 'url to img',
+      scala: 'url to img',
+      vue: 'url to img'
+    };
+    const cards = Object.keys(images).reduce((result, key) => {
+      const createCard = () => ({
+        id: id++,
+        type: key,
+        backImg: 'url to backImg',
+        frontImg: images[key],
+        flipped: false
+      });
+      result.push(createCard());
+      result.push(createCard());
+      return result;
+    }, []);
+  return cards;
+}
