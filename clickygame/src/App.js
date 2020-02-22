@@ -24,6 +24,7 @@ function App() {
       scala: 'url to img',
       vue: 'url to img'
     };
+
     const cards = Object.keys(images).reduce((result, key) => {
       const createCard = () => ({
         id: id++,
@@ -36,5 +37,8 @@ function App() {
       result.push(createCard());
       return result;
     }, []);
-  return cards;
+    return cards;
+  }
+  return cards, setCards;
 }
+export default App;
